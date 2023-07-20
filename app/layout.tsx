@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
 
 import Wrapper from "@/components/layout/wrapper";
+import NotificationProvider from "@/providers/NotificationProvider";
+import AuthProvider from "@/providers/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        <Wrapper>{children}</Wrapper>
+        <AuthProvider>
+          <NotificationProvider />
+          <Navbar />
+          <Wrapper>{children}</Wrapper>
+        </AuthProvider>
       </body>
     </html>
   );

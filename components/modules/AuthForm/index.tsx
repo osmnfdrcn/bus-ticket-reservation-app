@@ -7,13 +7,16 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import LoginSchema from "./LoginSchema";
 import RegisterSchema from "./RegisterSchema";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 type Props = {};
 
 const AuthForm = (props: Props) => {
   const [isMember, setIsMember] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -25,10 +28,7 @@ const AuthForm = (props: Props) => {
     validationSchema: isMember ? LoginSchema : RegisterSchema,
     onSubmit: async () => {
       setIsLoading(true);
-      console.log("submitted");
-
       const { name, email, password, gender } = formik.values;
-
       try {
         const data = {
           name,
@@ -43,15 +43,40 @@ const AuthForm = (props: Props) => {
         };
 
         isMember
-          ? // login api request
-            console.log(data)
-          : // register api request
-            console.log(data);
-        // setIsLoading(false);
-        formik.resetForm();
+          ? signIn("credentials", { email, password, redirect: false }).then(
+              (callback) => {
+                setIsLoading(false);
+                if (callback?.ok) {
+                  toast.success("Logged in");
+                  router.push("/");
+                }
+                if (callback?.error) {
+                  toast.error(callback.error);
+                }
+              }
+            )
+          : await fetch("/api/user/register/", requestOptions)
+              .then((res) => {
+                if (res?.ok) {
+                  console.log(res.json());
+
+                  setIsMember(true);
+                  // daha sonra success mesajlarini api'dan al.
+                  toast.success("Kayit basarili");
+                } else {
+                  // daha sonra error mesajlarini api'dan al.
+                  toast.error(
+                    "Kayitli email. Baska bir email ile kaydolmayi deneyin!"
+                  );
+                }
+              })
+              .catch((error) => console.log({ error }))
+              .finally(() => {
+                setIsLoading(false);
+                formik.resetForm();
+              });
       } catch (error) {
-        // toast error
-        console.log(error);
+        toast.error("Hata");
       }
     },
   });
