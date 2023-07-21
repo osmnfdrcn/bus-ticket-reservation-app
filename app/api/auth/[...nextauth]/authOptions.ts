@@ -14,10 +14,8 @@ export const authOptions: NextAuthOptions = {
         password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
-        console.log(credentials);
-
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid credentials");
+          throw new Error("Hatali girdi!");
         }
 
         const user = await prisma.user.findUnique({
@@ -27,7 +25,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!user || !user?.hashedPassword) {
-          throw new Error("Invalid credentials");
+          throw new Error("Hatali girdi!");
         }
 
         const isCorrectPassword = await compare(
@@ -36,7 +34,7 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!isCorrectPassword) {
-          throw new Error("Invalid credentials");
+          throw new Error("Hatali girdi");
         }
 
         return user;

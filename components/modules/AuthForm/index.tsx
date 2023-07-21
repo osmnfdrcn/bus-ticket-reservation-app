@@ -46,8 +46,8 @@ const AuthForm = (props: Props) => {
           ? signIn("credentials", { email, password, redirect: false }).then(
               (callback) => {
                 setIsLoading(false);
-                if (callback?.ok) {
-                  toast.success("Logged in");
+                if (!callback?.error) {
+                  toast.success("Giris basarili!");
                   router.push("/");
                 }
                 if (callback?.error) {
@@ -58,10 +58,7 @@ const AuthForm = (props: Props) => {
           : await fetch("/api/user/register/", requestOptions)
               .then((res) => {
                 if (res?.ok) {
-                  console.log(res.json());
-
                   setIsMember(true);
-                  // daha sonra success mesajlarini api'dan al.
                   toast.success("Kayit basarili");
                 } else {
                   // daha sonra error mesajlarini api'dan al.
@@ -136,7 +133,7 @@ const AuthForm = (props: Props) => {
   };
 
   return (
-    <div className="w-full col-span-2 lg:col-span-1 flex flex-col justify-center items-center bg-zinc-200/25 ">
+    <div className="w-full col-span-2 lg:col-span-1 flex flex-col justify-center items-center bg-zinc-200/25 rounded-xl ">
       <div className="w-4/5 sm:w-1/2 lg:w-3/5 flex flex-col justify-center items-center gap-4 ">
         <Title text={isMember ? "Giris" : "Kayit"} />
         <form onSubmit={formik.handleSubmit} className="w-full ">
@@ -172,8 +169,8 @@ const AuthForm = (props: Props) => {
             <Select
               label={"Cinsiyet"}
               options={[
-                { id: "erkek", name: "Erkek" },
-                { id: "kadin", name: "Kadin" },
+                { id: "erkek", name: "erkek" },
+                { id: "kadin", name: "kadin" },
               ]}
               onChange={formik.handleChange}
               name={"gender"}

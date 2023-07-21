@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  name           String?
+  email          String?  @unique
+  gender         String
+  hashedPassword String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  seats          Seat[]
+}
+
+model Seat {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  passenger   User?   @relation(fields: [passengerId], references: [id], onDelete: Cascade)
+  passengerId String? @unique @db.ObjectId
+  service     Service @relation(fields: [serviceId], references: [id])
+  serviceId   String
+}
+
+model Company {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  name     String    @unique
+  image    String
+  services Service[]
+}
+
+model Service {
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  fromCityId String      @db.ObjectId
+  from       City        @relation("ServiceFromCity", fields: [fromCityId], references: [id], onDelete: Cascade)
+  toCityId   String      @db.ObjectId
+  to         City        @relation("ServiceToCity", fields: [toCityId], references: [id], onDelete: Cascade)
+  departure  String
+  arrival    String
+  duration   String
+  company    Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId  String      @db.ObjectId
+  seats      Seat[]
+  fixedSeats FixedSeat[]
+}
+
+model City {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  name         String    @unique
+  fromServices Service[] @relation("ServiceFromCity")
+  toServices   Service[] @relation("ServiceToCity")
+}
+
+// Add a new model to represent the fixed set of seats for each service
+model FixedSeat {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  service    Service @relation(fields: [serviceId], references: [id])
+  serviceId  String  @db.ObjectId
+  seatNumber Int
+}

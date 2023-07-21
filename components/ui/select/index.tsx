@@ -1,5 +1,7 @@
+import { capitalizeFirstLetter } from "@/helpers/capitilize";
+
 type SelectProps = {
-  label: string;
+  label?: string;
   value?: string;
   options: { id: string; name: string; slug?: string }[];
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -19,7 +21,7 @@ const Select = ({
   placeHolder,
 }: SelectProps) => {
   return (
-    <div className="relative flex flex-col items-start gap-1 col-span-2 sm:col-span-1 w-full mb-4">
+    <div className="relative flex flex-col items-start gap-1 col-span-2 sm:col-span-1 w-full">
       <label htmlFor={label} className="w-full">
         <span className="text-slate-600 text-xs">{label}</span>
         {isError ? (
@@ -29,12 +31,14 @@ const Select = ({
           name={name}
           value={value}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onChange(e)}
-          className="block w-full px-4 py-2  text-slate-700 text-sm bg-white border border-gray-300 rounded-md  focus:border-slate-500  focus:outline-none focus:ring"
+          className="block w-full px-4 py-2 text-md text-gray-700 bg-white border border-gray-300 rounded-md  focus:border-slate-500  focus:outline-none focus:ring "
         >
-          {/* <option className="text-xs">{placeHolder}</option> */}
+          <option className="text-xs" value={""}>
+            {placeHolder}
+          </option>
           {options.map((option) => (
-            <option key={option.id} className="text-xs" value={option.id}>
-              {option.name}
+            <option key={option.id} className="text-xs " value={option.name}>
+              {capitalizeFirstLetter(option.name)}
             </option>
           ))}
         </select>
