@@ -34,11 +34,11 @@ const DatePicker = ({ onChange, value }) => {
   };
 
   return (
-    <div className="w-full relative flex justify-center items-center">
+    <div className="w-full relative flex justify-center items-center ">
       <input
         value={value}
         readOnly
-        className=" w-full px-4 py-2 text-md text-gray-700 bg-white border border-gray-300 rounded-md  focus:border-slate-500  focus:outline-none focus:ring"
+        className=" w-full px-4 py-2 text-md text-gray-700 bg-white border border-gray-300 rounded-md  focus:border-slate-500  focus:outline-none focus:ring cursor-pointer"
         onClick={() => setOpen((open) => !open)}
       />
 
@@ -50,7 +50,7 @@ const DatePicker = ({ onChange, value }) => {
           <Calendar
             date={new Date()}
             onChange={handleSelect}
-            className="calendarElement "
+            className="calendarElement cursor-pointer"
             onClick={() => setOpen(false)}
             minDate={new Date()}
           />

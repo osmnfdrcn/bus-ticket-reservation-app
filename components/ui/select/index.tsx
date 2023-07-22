@@ -21,8 +21,8 @@ const Select = ({
   placeHolder,
 }: SelectProps) => {
   return (
-    <div className="relative flex flex-col items-start gap-1 col-span-2 sm:col-span-1 w-full">
-      <label htmlFor={label} className="w-full">
+    <div className="relative flex flex-col items-start gap-1 col-span-2 sm:col-span-1 w-full ">
+      <label htmlFor={label} className="w-full ">
         <span className="text-slate-600 text-xs">{label}</span>
         {isError ? (
           <p className="text-xs text-right text-red-600">{errorMessage}</p>
@@ -31,7 +31,7 @@ const Select = ({
           name={name}
           value={value}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onChange(e)}
-          className="block w-full px-4 py-2 text-md text-gray-700 bg-white border border-gray-300 rounded-md  focus:border-slate-500  focus:outline-none focus:ring "
+          className="block w-full px-4 py-2 text-md text-gray-700 bg-white border border-gray-300 rounded-md  focus:border-slate-500  focus:outline-none focus:ring cursor-pointer "
         >
           <option className="text-xs" value={""}>
             {placeHolder}

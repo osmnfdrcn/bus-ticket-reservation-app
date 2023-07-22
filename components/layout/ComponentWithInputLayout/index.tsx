@@ -9,7 +9,7 @@ type Props = {
 
 const ComponentWithInputLayout = ({ children, image, text }: Props) => {
   return (
-    <div className="grid grid-cols-1  sm:grid-cols-2 w-full h-[calc(100vh-60px)] lg:h-[calc(100vh-80px)] pb-2 shadow-sm ">
+    <div className="grid grid-cols-1  sm:grid-cols-2 w-full h-[calc(100vh-60px)] lg:h-[calc(100vh-80px)] py-2 shadow-sm ">
       <div className="col-span-1 h-full hidden lg:block bg-cover bg-no-repeat bg-center relative ">
         <Image
           src={image!}

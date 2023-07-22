@@ -18,7 +18,7 @@ const Navbar = () => {
     : () => router.push("/auth");
 
   return (
-    <div className="w-full h-[60px] lg:h-[80px]  bg-white fixed top-0 left-0 right-0 z-50 px-[10px] ">
+    <div className="w-full h-[60px] lg:h-[80px]  bg-white fixed top-0 left-0 right-0 z-50 px-[10px] border border-b-1">
       <div className="max-w-[1280px] h-full mx-auto flex justify-between items-center">
         <Link href="/">
           <Logo />
