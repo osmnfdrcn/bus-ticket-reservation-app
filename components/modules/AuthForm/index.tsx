@@ -136,7 +136,10 @@ const AuthForm = (props: Props) => {
     <div className="w-full col-span-2 lg:col-span-1 flex flex-col justify-center items-center bg-zinc-200/25 rounded-xl ">
       <div className="w-4/5 sm:w-1/2 lg:w-3/5 flex flex-col justify-center items-center gap-4 ">
         <Title text={isMember ? "Giris" : "Kayit"} />
-        <form onSubmit={formik.handleSubmit} className="w-full ">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="w-full flex flex-col gap-3 "
+        >
           {isMember
             ? inputs
                 .filter((i) => i.login)

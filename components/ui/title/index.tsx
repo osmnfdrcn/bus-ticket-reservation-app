@@ -7,7 +7,7 @@ type Props = {
 
 const Title = ({ text, subText }: Props) => {
   return (
-    <div className="flex flex-col items-center justify-center mb-[20px] gap-2">
+    <div className="flex flex-col items-center justify-center mb-[10px] gap-2">
       <p className="text-slate-800 -tracking-wide text-2xl  font-bold leading-4">
         {text}
       </p>

@@ -8,6 +8,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
   const from = searchParams.get("from");
   const to = searchParams.get("to");
   const date = searchParams.get("date");
+  const id = searchParams.get("id");
 
   let formattedDate;
   if (date) {
@@ -18,8 +19,8 @@ export async function GET(req: NextRequest, res: NextResponse) {
   let query: any = {};
   from ? (query.from = from) : null;
   to ? (query.to = to) : null;
+  id ? (query.id = id) : null;
   date ? (query.date = formattedDate) : null;
-  console.log({ query });
 
   try {
     const services = await prisma.service.findMany({
