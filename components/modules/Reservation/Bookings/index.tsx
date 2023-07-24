@@ -4,6 +4,7 @@ import Title from "@/components/ui/title";
 import { capitalizeFirstLetter } from "@/helpers/capitilize";
 import { Service } from "@prisma/client";
 import { PiBusLight } from "react-icons/pi";
+import { redirect, useRouter } from "next/navigation";
 type Props = {
   service: Service;
   reservations: { name: string; gender: string; seat: number }[];
@@ -14,6 +15,7 @@ const Bookings = ({ reservations, service, setReservations }: Props) => {
   const parsedDate = parse(service.date, "yyyy-MM-dd", new Date());
   const formattedDate = format(parsedDate, "dd-MM-yyyy");
   const totalPrice = reservations.length * service.price;
+  const router = useRouter();
   return (
     <div className="w-full flex flex-col gap-2 ">
       <Title text="Rezervasyonlar" />
@@ -81,7 +83,11 @@ const Bookings = ({ reservations, service, setReservations }: Props) => {
           </div>
         </div>
       ))}
-      {reservations.length ? <Button>Odeme Sayfasina Git</Button> : null}
+      {reservations.length ? (
+        <Button onClick={() => router.push(`/checkout?total=${totalPrice}`)}>
+          Odeme Sayfasina Git
+        </Button>
+      ) : null}
     </div>
   );
 };
