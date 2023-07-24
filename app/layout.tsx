@@ -1,5 +1,5 @@
 import Navbar from "@/components/modules/navbar";
-import "../globals.css";
+import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
 
