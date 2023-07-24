@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Service, User } from "@prisma/client";
 
 export type IUser = Omit<User, "createdAt" | "updatedAt"> & {
   createdAt: string;

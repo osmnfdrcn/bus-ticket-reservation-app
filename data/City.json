@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "64baee68b7c546ebfe51c399"
+  },
+  "name": "istanbul"
+},{
+  "_id": {
+    "$oid": "64baee68b7c546ebfe51c39a"
+  },
+  "name": "ankara"
+},{
+  "_id": {
+    "$oid": "64baee68b7c546ebfe51c39b"
+  },
+  "name": "izmir"
+},{
+  "_id": {
+    "$oid": "64baee68b7c546ebfe51c39c"
+  },
+  "name": "kirikkale"
+},{
+  "_id": {
+    "$oid": "64baee68b7c546ebfe51c39d"
+  },
+  "name": "edirne"
+}]

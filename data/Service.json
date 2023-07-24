@@ -1,0 +1,231 @@
+[
+  {
+    "from": "istanbul",
+    "to": "ankara",
+    "date": "2023-07-25",
+    "fixedSeats": [
+      "3-kadin",
+      "11-erkek",
+      "16-kadin",
+      "22-erkek",
+      "23-kadin",
+      "30-erkek"
+    ],
+    "price": 500,
+    "freeSeats": 37,
+    "serviceCode": "IST-ANK-101",
+    "departure": "08:00",
+    "arrival": "15:00",
+    "company": "Kamil Koc"
+  },
+  {
+    "from": "istanbul",
+    "to": "edirne",
+    "date": "2023-07-26",
+    "fixedSeats": ["15-kadin", "21-erkek", "26-kadin", "32-erkek"],
+    "price": 350,
+    "freeSeats": 38,
+    "serviceCode": "IST-EDR-101",
+    "departure": "09:00",
+    "arrival": "12:30",
+    "company": "Varan"
+  },
+  {
+    "from": "istanbul",
+    "to": "izmir",
+    "date": "2023-07-27",
+    "fixedSeats": ["17-erkek", "26-kadin", "28-erkek", "33-kadin", "39-erkek"],
+    "price": 650,
+    "freeSeats": 30,
+    "serviceCode": "IST-IZM-101",
+    "departure": "11:00",
+    "arrival": "18:00",
+    "company": "Nilufer"
+  },
+  {
+    "from": "istanbul",
+    "to": "kirikkale",
+    "date": "2023-07-28",
+    "fixedSeats": ["8-kadin", "17-erkek", "23-kadin", "28-erkek"],
+    "price": 850,
+    "freeSeats": 41,
+    "serviceCode": "IST-KRK-101",
+    "departure": "06:00",
+    "arrival": "16:00",
+    "company": "Metro"
+  },
+  {
+    "from": "ankara",
+    "to": "istanbul",
+    "date": "2023-07-25",
+    "fixedSeats": ["9-kadin", "19-erkek", "29-kadin", "39-erkek"],
+    "price": 550,
+    "freeSeats": 36,
+    "serviceCode": "ANK-IST-101",
+    "departure": "13:00",
+    "arrival": "18:30",
+    "company": "Pamukkale"
+  },
+  {
+    "from": "ankara",
+    "to": "izmir",
+    "date": "2023-07-26",
+    "fixedSeats": [
+      "7-kadin",
+      "12-erkek",
+      "16-kadin",
+      "19-erkek",
+      "24-kadin",
+      "27-erkek",
+      "30-erkek",
+      "35-erkek"
+    ],
+    "price": 750,
+    "freeSeats": 38,
+    "serviceCode": "ANK-IZM-101",
+    "departure": "13:30",
+    "arrival": "22:00",
+    "company": "Kent"
+  },
+  {
+    "from": "ankara",
+    "to": "edirne",
+    "date": "2023-07-27",
+    "fixedSeats": [
+      "3-kadin",
+      "11-erkek",
+      "16-kadin",
+      "22-erkek",
+      "23-kadin",
+      "30-erkek"
+    ],
+    "price": 1000,
+    "freeSeats": 38,
+    "serviceCode": "ANK-EDR-101",
+    "departure": "14:00",
+    "arrival": "23:30",
+    "company": "Sec Turizm"
+  },
+  {
+    "from": "ankara",
+    "to": "kirikkale",
+    "date": "2023-07-28",
+    "fixedSeats": [
+      "3-kadin",
+      "11-erkek",
+      "16-kadin",
+      "22-erkek",
+      "23-kadin",
+      "30-erkek"
+    ],
+    "price": 350,
+    "freeSeats": 37,
+    "serviceCode": "ANK-KRK-101",
+    "departure": "18:00",
+    "arrival": "20:30",
+    "company": "Kamil Koc"
+  },
+  {
+    "from": "kirikkale",
+    "to": "istanbul",
+    "date": "2023-07-25",
+    "fixedSeats": [
+      "1-kadin",
+      "14-erkek",
+      "18-kadin",
+      "27-erkek",
+      "30-kadin",
+      "32-erkek"
+    ],
+    "price": 850,
+    "freeSeats": 37,
+    "serviceCode": "KRK-IST-101",
+    "departure": "08:00",
+    "arrival": "15:00",
+    "company": "Varan"
+  },
+  {
+    "from": "kirikkale",
+    "to": "izmir",
+    "date": "2023-07-26",
+    "fixedSeats": ["2-kadin", "14-erkek", "26-kadin", "40-erkek"],
+    "price": 950,
+    "freeSeats": 38,
+    "serviceCode": "KRK-IZM-101",
+    "departure": "01:00",
+    "arrival": "11:00",
+    "company": "Pamukkale"
+  },
+  {
+    "from": "kirikkale",
+    "to": "edirne",
+    "date": "2023-07-27",
+    "fixedSeats": ["3k", "5e", "17k", "22e"],
+    "price": 1000,
+    "freeSeats": 41,
+    "serviceCode": "KRK-EDR-101",
+    "departure": "06:00",
+    "arrival": "16:00",
+    "company": "Nilufer"
+  },
+  {
+    "from": "kirikkale",
+    "to": "ankara",
+    "date": "2023-07-28",
+    "fixedSeats": ["3-kadin", "14-erkek", "17-kadin", "20-erkek"],
+    "price": 300,
+    "freeSeats": 38,
+    "serviceCode": "KRK-ANK-101",
+    "departure": "17:00",
+    "arrival": "20:30",
+    "company": "Kent"
+  },
+  {
+    "from": "izmir",
+    "to": "istanbul",
+    "date": "2023-07-25",
+    "fixedSeats": ["3-kadin", "11-erkek", "16-kadin", "22-erkek"],
+    "price": 800,
+    "freeSeats": 41,
+    "serviceCode": "IZM-IST-101",
+    "departure": "08:00",
+    "arrival": "15:00",
+    "company": "Varan"
+  },
+  {
+    "from": "izmir",
+    "to": "kirikkale",
+    "date": "2023-07-26",
+    "fixedSeats": ["13-kadin", "18-erkek", "29-kadin", "37-erkek", "40-kadin"],
+    "price": 1000,
+    "freeSeats": 36,
+    "serviceCode": "IZM-KRK-101",
+    "departure": "10:00",
+    "arrival": "20:00",
+    "company": "Metro"
+  },
+  {
+    "from": "izmir",
+    "to": "edirne",
+    "date": "2023-07-27",
+    "fixedSeats": ["10-kadin", "20-erkek", "25-kadin", "35-erkek", "28-kadin"],
+    "price": 800,
+    "freeSeats": 30,
+    "serviceCode": "IZM-EDR-101",
+    "departure": "07:00",
+    "arrival": "16:00",
+    "company": "Sec Turizm"
+  },
+  {
+    "from": "izmir",
+    "to": "ankara",
+    "date": "2023-07-28",
+    "fixedSeats": ["5-kadin", "16-erkek", "25-kadin", "30-erkek", "33-kadin"],
+    "price": 900,
+    "freeSeats": 38,
+    "serviceCode": "IZM-ANK-101",
+    "departure": "09:30",
+    "arrival": "17:00",
+    "company": "Pamukkale"
+  }
+]
