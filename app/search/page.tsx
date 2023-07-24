@@ -13,19 +13,17 @@ type Props = {
 };
 
 const SearchPage = async ({ searchParams }: Props) => {
+  const properties = await getServices(searchParams);
+
   const url = createUrl(searchParams);
   const { from, to, date } = searchParams;
-  let text = "";
-  !!from ? (text += `${capitalizeFirstLetter(from)} -`) : "Tum Lokasyonlar - ";
-  !!to ? (text += ` ${capitalizeFirstLetter(to)} -`) : "Tum Lokasyonlar";
-  !!date ? (text += ` ${date} -`) : null;
 
   const cities = await getCities();
-  const trips = await getServices(url);
+  const trips = await getServices(searchParams);
 
   return (
     <div className="flex flex-col gap-6 items-center w-full mt-[100px] lg:mt-[120px]">
-      <Title text="Sonuclar" subText={text.slice(0, -1)} />
+      <Title text="Sonuclar" />
       <div className="w-full p-2">
         <Search cityOptions={cities!} allFiltersMandatory={false} />
       </div>

@@ -17,6 +17,7 @@ Kullanilan datalari iceren dosyalara data dizini icinde erisip, kendi database'i
 * clone the project
   git clone https://github.com/osmnfdrcn/bus-ticket-reservation-app.git
 * cd bus-ticket-reservation-app/
+   npm i
    npm run build
    npm run start
 ```
