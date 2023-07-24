@@ -13,7 +13,7 @@ type Props = {
 async function Service({ params: { id } }: Props) {
   const user = await getCurrentUser();
   if (!user) redirect("/auth");
-  const data = await getServices(`http://localhost:3000/api/service?id=${id}`);
+  const data = await getServices({ id });
   if (!data?.length) {
     return (
       <div className="mt-[20%]">

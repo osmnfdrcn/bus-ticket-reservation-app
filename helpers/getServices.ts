@@ -1,25 +1,12 @@
-// import prisma from "@/libs/prismadb";
-// import { Service } from "@prisma/client";
+import prisma from "@/libs/prismadb";
+import { parse, format } from "date-fns";
 
-// export default async function getServices(url: string) {
-
-//   try {
-//     const data = await fetch(url);
-//     const trips: Service[] = await data.json();
-//     return trips;
-//   } catch (error: any) {
-//     // throw new Error(error);
-//   }
-// }
 export interface IServiceParams {
   from?: string;
   to?: string;
   date?: string;
   id?: string;
 }
-import prisma from "@/libs/prismadb";
-import { Service } from "@prisma/client";
-import { parse, format } from "date-fns";
 
 export default async function getServices(params: IServiceParams) {
   const { from, to, date, id } = params;
