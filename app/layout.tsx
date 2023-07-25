@@ -2,7 +2,7 @@ import Navbar from "@/components/modules/navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Bebas_Neue } from "next/font/google";
-
+import { Analytics } from "@vercel/analytics/react";
 import Wrapper from "@/components/layout/wrapper";
 import NotificationProvider from "@/providers/NotificationProvider";
 import AuthProvider from "@/providers/AuthProvider";
@@ -27,6 +27,7 @@ export default function RootLayout({
           <NotificationProvider />
           <Navbar />
           <Wrapper>{children}</Wrapper>
+          <Analytics />
         </AuthProvider>
       </body>
     </html>
