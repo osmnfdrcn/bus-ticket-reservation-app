@@ -1,4 +1,4 @@
-import Search from "@/components/modules/Search";
+import Filter from "@/components/modules/Filter";
 import HeadLine from "@/components/ui/headline";
 import getCities from "@/helpers/getCities";
 import heroImage from "@/public/images/hero.webp";
@@ -24,7 +24,7 @@ const Home = async (props: Props) => {
           <HeadLine text="Yolculugunuzu Bizimle Planlayin" />
           <div className="w-full  bg-yellow-400/70 h-2 my-4 " />
           <div className="w-full lg:w-3/4 xl:w-2/3">
-            <Search cityOptions={cities!} allFiltersMandatory={true} />
+            <Filter cityOptions={cities!} allFiltersMandatory={true} />
           </div>
         </div>
       </div>
