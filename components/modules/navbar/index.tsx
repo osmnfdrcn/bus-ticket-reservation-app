@@ -23,14 +23,21 @@ const Navbar = () => {
         <Link href="/">
           <Logo />
         </Link>
-        <Button
-          className="justify-self-center"
-          variant={"primary"}
-          size="default"
-          onClick={buttonOnClick}
-        >
-          {!!session ? "Cikis" : "Giris"}
-        </Button>
+        <div className="flex  items-center justify-end gap-2">
+          <p className="text-xs font-semibold   px-4 py-2 text-slate-700 ">
+            {" "}
+            {session?.user?.name || "Misafir"}
+          </p>
+
+          <Button
+            className="justify-self-center"
+            variant={`${session?.user ? "secondary" : "primary"}`}
+            size="default"
+            onClick={buttonOnClick}
+          >
+            {!!session ? "Cikis" : "Giris"}
+          </Button>
+        </div>
       </div>
     </div>
   );
