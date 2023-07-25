@@ -14,7 +14,10 @@ const RegisterSchema = Yup.object().shape({
 
   email: Yup.string()
     .required("gerekli")
-    .matches(emailRegex, "gecerli bir email adresi giriniz"),
+    .matches(
+      emailRegex,
+      "sadece kucur harf ile gecerli bir email adresi giriniz"
+    ),
 
   password: Yup.string()
     .required("gerekli")

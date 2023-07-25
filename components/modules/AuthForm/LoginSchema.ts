@@ -4,7 +4,10 @@ import * as Yup from "yup";
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .required("gerekli")
-    .matches(emailRegex, "gecerli bir email adreesi giriniz"),
+    .matches(
+      emailRegex,
+      "sadece kucur harf ile gecerli bir email adresi giriniz"
+    ),
   password: Yup.string().required("gerekli"),
 });
 

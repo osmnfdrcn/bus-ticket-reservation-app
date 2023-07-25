@@ -43,18 +43,20 @@ const AuthForm = (props: Props) => {
         };
 
         isMember
-          ? signIn("credentials", { email, password, redirect: false }).then(
-              (callback) => {
-                setIsLoading(false);
-                if (!callback?.error) {
-                  toast.success("Giris basarili!");
-                  router.push("/");
-                }
-                if (callback?.error) {
-                  toast.error(callback.error);
-                }
+          ? signIn("credentials", {
+              email: email.toLowerCase(),
+              password,
+              redirect: false,
+            }).then((callback) => {
+              setIsLoading(false);
+              if (!callback?.error) {
+                toast.success("Giris basarili!");
+                router.push("/");
               }
-            )
+              if (callback?.error) {
+                toast.error(callback.error);
+              }
+            })
           : await fetch("/api/user/register/", requestOptions)
               .then((res) => {
                 if (res?.ok) {
