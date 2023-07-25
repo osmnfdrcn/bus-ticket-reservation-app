@@ -1,27 +1,34 @@
 "use client";
 
-import Title from "@/components/ui/title";
-import NoResult from "@/components/modules/NoResult";
 import Filter from "@/components/modules/Filter";
+import NoResult from "@/components/modules/NoResult";
 import ServiceCard from "@/components/modules/ServiceCard";
+import Title from "@/components/ui/title";
+import usePagination from "@/hooks/usePagination";
 import { City, Service } from "@prisma/client";
 import Link from "next/link";
-import usePagination from "@/hooks/usePagination";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "../Pagination";
+
 type Props = {
   cities: City[];
   trips: Service[];
+  searchParams: { from: string; to: string; date: string };
 };
 
-const Search = ({ cities, trips }: Props) => {
+const Search = ({ cities, trips, searchParams }: Props) => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const { next, prev, currentData, currentPage, maxPage } = usePagination({
-    data: trips,
-    itemsPerPage,
-  });
+  const { from, to, date } = searchParams;
+
+  const { next, prev, currentData, currentPage, maxPage, resetPage } =
+    usePagination({
+      data: trips,
+      itemsPerPage,
+    });
   const data = currentData();
-  console.log(data);
+  useEffect(() => {
+    resetPage();
+  }, [from, to, date]);
 
   return (
     <div className="flex flex-col gap-6 items-center w-full mt-[100px] lg:mt-[120px]">

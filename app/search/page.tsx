@@ -15,7 +15,7 @@ const SearchPage = async ({ searchParams }: Props) => {
   const cities = await getCities();
   const trips = await getServices(searchParams);
 
-  return <Search cities={cities!} trips={trips!} />;
+  return <Search cities={cities!} trips={trips!} searchParams={searchParams} />;
 };
 
 export default SearchPage;
