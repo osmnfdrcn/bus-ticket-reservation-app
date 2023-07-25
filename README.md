@@ -31,3 +31,7 @@ DB : MongoDB
 ORM : Prisma
 Form Validation : Formik, Yup
 Authentication : next-auth
+
+## Dokumantasyon
+
+Uygulmanin calismasi ilgili detayli bilgiye docs dizini altindaki dokumantasyon dosyasinda bulabilirsiniz.
