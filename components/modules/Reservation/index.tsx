@@ -9,6 +9,7 @@ import Seat from "./Seat";
 import Bookings from "./Bookings";
 import { BsExclamationOctagon } from "react-icons/bs";
 import { toast } from "react-hot-toast";
+import useReservations from "@/hooks/useReservations";
 
 type Props = {
   service: Service;
@@ -16,13 +17,13 @@ type Props = {
 };
 
 function Reservation({ service, user }: Props) {
+  const { reservations, addReservation, removeReservation, reset } =
+    useReservations();
   const [currentPassenger, setCurrentPassenger] = useState<{
     name: string;
     gender: string;
   }>({ name: user.name!, gender: user.gender });
-  const [reservations, setReservations] = useState<
-    { name: string; gender: string; seat: number }[]
-  >([]);
+  console.log({ reservations });
 
   //otobusun koltuk duzeni
   // 5li grid, 3n+3 nolu elemanin value'su yok, sadece value'su olan elemanlar ekrana yazdirilacak
@@ -72,18 +73,19 @@ function Reservation({ service, user }: Props) {
     isCancelable: { name: string; gender: string; seat: number } | undefined
   ) => {
     if (reservations.length < 5) {
-      if (isCancelable) {
-        setReservations(reservations.filter((r) => r.seat !== seatNumber));
-        return;
-      }
-      setReservations([
-        ...reservations,
-        {
-          name: currentPassenger.name!,
-          gender: currentPassenger.gender,
-          seat: seatNumber,
-        },
-      ]);
+      // if (isCancelable) {
+      //   removeReservation(reservations.filter((r) => r.seat !== seatNumber));
+      //   return;
+      // }
+      addReservation({
+        name: currentPassenger.name!,
+        gender: currentPassenger.gender,
+        seat: seatNumber,
+        price: service.price,
+        from: service.from,
+        to: service.to,
+        company: service.company,
+      });
       notBookableSeats.push(seatNumber);
       setCurrentPassenger({ name: "", gender: "" });
     }
@@ -103,7 +105,7 @@ function Reservation({ service, user }: Props) {
         <div className="w-full ">
           <Bookings
             reservations={reservations}
-            setReservations={setReservations}
+            removeReservation={removeReservation}
             service={service}
           />
         </div>

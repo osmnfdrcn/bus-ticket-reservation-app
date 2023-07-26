@@ -1,21 +1,28 @@
-import { format, parse } from "date-fns";
 import Button from "@/components/ui/button";
 import Title from "@/components/ui/title";
 import { capitalizeFirstLetter } from "@/helpers/capitilize";
+import useReservations from "@/hooks/useReservations";
+import { IReservation } from "@/types";
 import { Service } from "@prisma/client";
+import { format, parse } from "date-fns";
+import { useRouter } from "next/navigation";
 import { PiBusLight } from "react-icons/pi";
-import { redirect, useRouter } from "next/navigation";
 type Props = {
   service: Service;
-  reservations: { name: string; gender: string; seat: number }[];
-  setReservations: any;
+  reservations: IReservation[];
+  removeReservation: (r: IReservation) => void;
 };
 
-const Bookings = ({ reservations, service, setReservations }: Props) => {
+const Bookings = ({ service, removeReservation }: Props) => {
   const parsedDate = parse(service.date, "yyyy-MM-dd", new Date());
   const formattedDate = format(parsedDate, "dd-MM-yyyy");
+  const { reservations } = useReservations();
   const totalPrice = reservations.length * service.price;
   const router = useRouter();
+
+  const handleCheckoutButtonClick = () => {
+    router.push(`/checkout`);
+  };
   return (
     <div className="w-full flex flex-col gap-2 ">
       <Title text="Rezervasyonlar" />
@@ -73,7 +80,7 @@ const Bookings = ({ reservations, service, setReservations }: Props) => {
                   size={"small"}
                   onClick={() => {
                     const r = reservations?.filter((r) => r.seat != p.seat);
-                    setReservations(r);
+                    removeReservation(p);
                   }}
                 >
                   Iptal
@@ -84,9 +91,7 @@ const Bookings = ({ reservations, service, setReservations }: Props) => {
         </div>
       ))}
       {reservations.length ? (
-        <Button onClick={() => router.push(`/checkout?total=${totalPrice}`)}>
-          Odeme Sayfasina Git
-        </Button>
+        <Button onClick={handleCheckoutButtonClick}>Odeme Sayfasina Git</Button>
       ) : null}
     </div>
   );

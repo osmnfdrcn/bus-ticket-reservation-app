@@ -35,7 +35,6 @@ const Search = ({ cities, trips, searchParams }: Props) => {
       <Title text="Sonuclar" />
       <div className="w-full p-2">
         <Filter cityOptions={cities!} allFiltersMandatory={false} />
-
         <Pagination
           maxPage={maxPage}
           next={next}

@@ -30,7 +30,7 @@ async function Service({ params: { id } }: Props) {
   }
   const service = data?.[0];
 
-  return <Reservation service={service} user={user} />;
+  return <Reservation service={service} user={user!} />;
 }
 
 export default Service;
