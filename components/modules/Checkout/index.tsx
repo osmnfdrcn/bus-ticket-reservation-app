@@ -1,21 +1,32 @@
 "use client";
-import React, { useReducer, useState } from "react";
-import { toast } from "react-hot-toast";
-import { initialState, reducer } from "./reducer";
-import Spinner from "@/components/ui/spinner";
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
+import Spinner from "@/components/ui/spinner";
 import Title from "@/components/ui/title";
-import { redirect, useRouter } from "next/navigation";
-import useReservations from "@/hooks/useReservations";
-import { v4 as uuid } from "uuid";
 import { capitalizeFirstLetter } from "@/helpers/capitilize";
+import useReservations from "@/hooks/useReservations";
+import { useRouter } from "next/navigation";
+import React, { useReducer } from "react";
+import { toast } from "react-hot-toast";
+import { v4 as uuid } from "uuid";
+import NoResult from "../NoResult";
+import { initialState, reducer } from "./reducer";
 const Checkout = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { name, ccno, ccv, expire, isLoading } = state;
   const router = useRouter();
   const { reservations, removeReservation, reset } = useReservations();
-  if (!reservations.length) redirect("/");
+  if (!reservations.length) {
+    return (
+      <div className="mt-[200px]">
+        <NoResult
+          title="Herhangi bir reezrvasyonunuz gorunmuyor"
+          subTitle="Lutfen once rezervasyon yapiniz."
+          buttonText="Arama Sayfasina Don"
+        />
+      </div>
+    );
+  }
 
   const total = reservations.reduce((acc, el) => (acc += el.price), 0);
   const wait = (milliseconds: number) => {
@@ -125,7 +136,7 @@ const Checkout = () => {
                 <p className="text-xs text-slate-700 font-bold text-cente">
                   {capitalizeFirstLetter(r.company)}
                 </p>
-                {/* <Button
+                <Button
                   className="font-bold"
                   size={"small"}
                   variant={"link"}
@@ -133,7 +144,7 @@ const Checkout = () => {
                 >
                   {" "}
                   Sil{" "}
-                </Button> */}
+                </Button>
               </div>
             ))}
           </div>

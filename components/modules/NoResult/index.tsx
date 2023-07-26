@@ -6,12 +6,14 @@ interface EmptyStateProps {
   title?: string;
   subTitle?: string;
   showReset?: boolean;
+  buttonText?: string;
 }
 
 const NoResult = ({
   title = "Kriterleriniz ile eslesen sonuc bulunamadi",
   subTitle = "Lutfen seceneklrinizi gozden gecirip tekrar deneyin ya da filtreleri temizlyin!.",
   showReset,
+  buttonText,
 }: EmptyStateProps) => {
   const router = useRouter();
 
@@ -23,7 +25,7 @@ const NoResult = ({
       </div>
       <div className="w-48 mt-4">
         <Button variant={"secondary"} onClick={() => router.push("/search")}>
-          Filtreleri Temizle
+          {buttonText || "Filtreleri Temizle"}
         </Button>
       </div>
     </div>
