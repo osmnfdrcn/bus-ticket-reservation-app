@@ -114,7 +114,7 @@ const Checkout = () => {
           <div className="flex flex-col gap-2 lg:mt-10">
             {reservations.map((r) => (
               <div
-                className="w-full grid grid-cols-5 gap-2 lg:gap-4 p-2  items-center bg-slate-50  "
+                className="w-full grid grid-cols-6 gap-2 lg:gap-4 p-2  items-center bg-slate-50  "
                 key={uuid()}
               >
                 <p className="text-xs text-slate-700 font-bold ">{r.name}</p>
