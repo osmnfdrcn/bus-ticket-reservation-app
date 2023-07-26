@@ -13,9 +13,6 @@ const usePagination = ({ data, itemsPerPage }: Props) => {
   const currentData = () => {
     const begin = (currentPage - 1) * itemsPerPage;
     const end = begin + itemsPerPage;
-
-    console.log(begin, "-", end);
-
     return data?.slice(begin, end);
   };
 

@@ -7,6 +7,8 @@ import { Service } from "@prisma/client";
 import { useState } from "react";
 import Seat from "./Seat";
 import Bookings from "./Bookings";
+import { BsExclamationOctagon } from "react-icons/bs";
+import { toast } from "react-hot-toast";
 
 type Props = {
   service: Service;
@@ -86,116 +88,126 @@ function Reservation({ service, user }: Props) {
       setCurrentPassenger({ name: "", gender: "" });
     }
   };
-
+  // reservations.length === 5
+  //   ? toast.success("En fazla 5 koltuk rezerve edilebilir!")
+  //   : null;
   return (
-    <div className="w-3/4 md:w-2/3 mx-auto flex flex-col-reverse lg:flex-row-reverse justify-center  mt-[100px] lg:mt-[120px] py-2 lg:gap-6">
-      <div className="w-full ">
-        <Bookings
-          reservations={reservations}
-          setReservations={setReservations}
-          service={service}
-        />
-      </div>
-
-      <div className="w-full flex flex-col col-span-2 items-center justify-start gap-4 ">
-        <div className="w-full  mb-[40px] lg:mb-[20px]">
-          {reservations.length > 0 && reservations.length < 5 ? (
-            //Yolcu Bilgleri
-            <>
-              <Title text="Yolcu Bilgileri" />
-              <div className="flex flex-col justify-start items-center gap-2 ">
-                <Input
-                  type="text"
-                  label="Isim Soyisim"
-                  name={"name"}
-                  value={currentPassenger.name}
-                  onChange={(e) =>
-                    setCurrentPassenger({
-                      ...currentPassenger,
-                      name: e.target.value,
-                    })
-                  }
-                />
-                <Radio
-                  options={[
-                    { label: "Erkek", value: "erkek", name: "erkek" },
-                    { label: "Kadin", value: "kadin", name: "kadin" },
-                  ]}
-                  currentPassengerGender={currentPassenger.gender}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setCurrentPassenger({
-                      ...currentPassenger,
-                      gender: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-            </>
-          ) : null}
+    <>
+      {reservations.length === 5 ? (
+        <div className="absolute text-sm text-white font-semibold p-1  flex items-center justify-center gap-2  top-[80px] left-0 right-0 bg-rose-600/80">
+          <BsExclamationOctagon className="font-extrabold" />
+          En fazla rezerve edilebilir koltuk sayisina ulastiniz!
+        </div>
+      ) : null}
+      <div className="w-3/4 md:w-2/3 mx-auto flex flex-col-reverse lg:flex-row-reverse justify-center  mt-[100px] lg:mt-[120px] py-2 lg:gap-6">
+        <div className="w-full ">
+          <Bookings
+            reservations={reservations}
+            setReservations={setReservations}
+            service={service}
+          />
         </div>
 
-        {/* Koltuk secimi */}
-        {reservations.length < 5 &&
-        currentPassenger.gender &&
-        currentPassenger.name ? (
-          <div className="w-full flex flex-col items-center justify-center gap-6 bg-white mr-2 mb-[40px]">
-            <Title text="Koltuk Secimi" />
-
-            <div className="mx-auto p-6 grid grid-cols-5 gap-2 justify-center text-center w-full -m-[30px]">
-              {busSeats.map((seat) => {
-                const isInFixedSeats = findSeatGender(
-                  service?.fixedSeats!,
-                  +seat.value!
-                ); //{seat:23, gender:"kadin"}
-                // on tanimli olarak oturulamaz durumdaki koltiklardan ise koltuk numarasi ve oturan kisinin cinsiyeti
-                const notBookable = notBookableSeats.includes(+seat.value!);
-                const isCancelable = reservations.find(
-                  (r) => r.seat === +seat?.value!
-                );
-
-                return (
-                  <div key={seat.id}>
-                    {(seat.value &&
-                      currentPassenger.gender &&
-                      currentPassenger.name) ||
-                    !reservations.length ? ( //
-                      <Seat
-                        isInFixedSeats={isInFixedSeats!} //on tanimli dolu koltuklardan mi
-                        value={seat.value!} // koltuk no
-                        isBookable={!notBookable}
-                        onClick={() => {
-                          !notBookable
-                            ? handleSeatClick(+seat.value!, isCancelable)
-                            : {};
-                        }}
-                      />
-                    ) : null}
-                  </div>
-                );
-              })}
-            </div>
-            <div className="grid grid-cols-4 p-2 gap-2">
-              <div className="flex flex-col items-center justify-center w-full">
-                <div className="p-2 border-2 rounded-full  bg-blue-400 text-black" />
-                <p className="text-xs font-light">Erkek Yolcu</p>
-              </div>
-              <div className="flex flex-col items-center justify-center w-full">
-                <div className="p-2 border-2 rounded-full  bg-rose-400 text-black" />
-                <p className="text-xs font-light">Kadin Yolcu</p>
-              </div>
-              <div className="flex flex-col items-center justify-center w-full">
-                <div className="p-2 border-2 rounded-full text-xs font-light bg-white text-black" />
-                <p className="text-xs font-light">Uygun</p>
-              </div>
-              <div className="flex flex-col items-center justify-center w-full">
-                <div className="p-2 border-2 rounded-full text-xs font-light bg-black text-white" />
-                <p className="text-xs font-light">Alinamaz</p>
-              </div>
-            </div>
+        <div className="w-full flex flex-col col-span-2 items-center justify-start gap-4 ">
+          <div className="w-full  mb-[40px] lg:mb-[20px]">
+            {reservations.length > 0 && reservations.length < 5 ? (
+              //Yolcu Bilgleri
+              <>
+                <Title text="Yolcu Bilgileri" />
+                <div className="flex flex-col justify-start items-center gap-2 ">
+                  <Input
+                    type="text"
+                    label="Isim Soyisim"
+                    name={"name"}
+                    value={currentPassenger.name}
+                    onChange={(e) =>
+                      setCurrentPassenger({
+                        ...currentPassenger,
+                        name: e.target.value,
+                      })
+                    }
+                  />
+                  <Radio
+                    options={[
+                      { label: "Erkek", value: "erkek", name: "erkek" },
+                      { label: "Kadin", value: "kadin", name: "kadin" },
+                    ]}
+                    currentPassengerGender={currentPassenger.gender}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setCurrentPassenger({
+                        ...currentPassenger,
+                        gender: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+              </>
+            ) : null}
           </div>
-        ) : null}
+
+          {/* Koltuk secimi */}
+          {reservations.length < 5 &&
+          currentPassenger.gender &&
+          currentPassenger.name ? (
+            <div className="w-full flex flex-col items-center justify-center gap-6 bg-white mr-2 mb-[40px]">
+              <Title text="Koltuk Secimi" />
+
+              <div className="mx-auto p-6 grid grid-cols-5 gap-2 justify-center text-center w-full -m-[30px]">
+                {busSeats.map((seat) => {
+                  const isInFixedSeats = findSeatGender(
+                    service?.fixedSeats!,
+                    +seat.value!
+                  ); //{seat:23, gender:"kadin"}
+                  // on tanimli olarak oturulamaz durumdaki koltiklardan ise koltuk numarasi ve oturan kisinin cinsiyeti
+                  const notBookable = notBookableSeats.includes(+seat.value!);
+                  const isCancelable = reservations.find(
+                    (r) => r.seat === +seat?.value!
+                  );
+
+                  return (
+                    <div key={seat.id}>
+                      {(seat.value &&
+                        currentPassenger.gender &&
+                        currentPassenger.name) ||
+                      !reservations.length ? ( //
+                        <Seat
+                          isInFixedSeats={isInFixedSeats!} //on tanimli dolu koltuklardan mi
+                          value={seat.value!} // koltuk no
+                          isBookable={!notBookable}
+                          onClick={() => {
+                            !notBookable
+                              ? handleSeatClick(+seat.value!, isCancelable)
+                              : {};
+                          }}
+                        />
+                      ) : null}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="grid grid-cols-4 p-2 gap-2">
+                <div className="flex flex-col items-center justify-center w-full">
+                  <div className="p-2 border-2 rounded-full  bg-blue-400 text-black" />
+                  <p className="text-xs font-light">Erkek Yolcu</p>
+                </div>
+                <div className="flex flex-col items-center justify-center w-full">
+                  <div className="p-2 border-2 rounded-full  bg-rose-400 text-black" />
+                  <p className="text-xs font-light">Kadin Yolcu</p>
+                </div>
+                <div className="flex flex-col items-center justify-center w-full">
+                  <div className="p-2 border-2 rounded-full text-xs font-light bg-white text-black" />
+                  <p className="text-xs font-light">Uygun</p>
+                </div>
+                <div className="flex flex-col items-center justify-center w-full">
+                  <div className="p-2 border-2 rounded-full text-xs font-light bg-black text-white" />
+                  <p className="text-xs font-light">Alinamaz</p>
+                </div>
+              </div>
+            </div>
+          ) : null}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

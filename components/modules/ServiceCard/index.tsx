@@ -35,6 +35,7 @@ const ServiceCard = ({ service }: Props) => {
               {capitalizeFirstLetter(service.from)}
             </p>
           </div>
+
           <div className="flex flex-col p-2">
             <p className="text-sm sm:text-lg font-bold">{service.arrival}</p>
             <p className="text-slate-500 font-semibold text-sm md:text-lg">

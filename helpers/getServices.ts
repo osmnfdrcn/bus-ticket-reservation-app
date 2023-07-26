@@ -10,7 +10,6 @@ export interface IServiceParams {
 
 export default async function getServices(params: IServiceParams) {
   const { from, to, date, id } = params;
-  console.log(params);
 
   let formattedDate;
   if (date) {

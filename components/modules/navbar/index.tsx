@@ -24,7 +24,7 @@ const Navbar = () => {
           <Logo />
         </Link>
         <div className="flex  items-center justify-end gap-2">
-          <p className="text-xs font-semibold   px-4 py-2 text-slate-700 ">
+          <p className="text-xs font-semibold   px-2 py-2 text-slate-700 ">
             {" "}
             {session?.user?.name || "Misafir"}
           </p>
