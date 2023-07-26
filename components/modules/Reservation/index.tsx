@@ -4,7 +4,7 @@ import Radio from "@/components/ui/radio";
 import Title from "@/components/ui/title";
 import { IUser } from "@/types";
 import { Service } from "@prisma/client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Seat from "./Seat";
 import Bookings from "./Bookings";
 import { BsExclamationOctagon } from "react-icons/bs";

@@ -14,7 +14,9 @@ const Home = async (props: Props) => {
           src={heroImage}
           alt="hero"
           fill
+          sizes="100vw"
           quality={90}
+          placeholder="blur"
           style={{ objectFit: "cover" }}
           className="brightness-50 rounded-xl"
           priority={true}
