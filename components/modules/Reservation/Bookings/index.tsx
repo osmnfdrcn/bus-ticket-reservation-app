@@ -17,7 +17,10 @@ const Bookings = ({ service, removeReservation }: Props) => {
   const parsedDate = parse(service.date, "yyyy-MM-dd", new Date());
   const formattedDate = format(parsedDate, "dd-MM-yyyy");
   const { reservations } = useReservations();
-  const totalPrice = reservations.length * service.price;
+  const totalPrice = reservations.reduce(
+    (acc, el) => (acc += el.service.price),
+    0
+  );
   const router = useRouter();
 
   const handleCheckoutButtonClick = () => {
@@ -52,19 +55,21 @@ const Bookings = ({ service, removeReservation }: Props) => {
                   className="font-extralight text-slate-500 "
                 />
                 <div className="flex flex-col">
-                  <p className="text-sm font-bold">{service.company}</p>
-                  <p className="text-xs text-gray-500">{service.serviceCode}</p>
+                  <p className="text-sm font-bold">{p.service.company}</p>
+                  <p className="text-xs text-gray-500">
+                    {p.service.serviceCode}
+                  </p>
                 </div>
               </div>
 
               <div className="flex flex-col p-2">
-                <p className="text-sm  font-bold">{service.departure}</p>
+                <p className="text-sm  font-bold">{p.service.departure}</p>
                 <p className="text-slate-500 font-semibold text-sm ">
                   {capitalizeFirstLetter(service.from)}
                 </p>
               </div>
               <div className="flex flex-col p-2">
-                <p className="text-sm  font-bold">{service.arrival}</p>
+                <p className="text-sm  font-bold">{p.service.arrival}</p>
                 <p className="text-slate-500 font-semibold text-sm ">
                   {capitalizeFirstLetter(service.to)}
                 </p>
@@ -73,7 +78,7 @@ const Bookings = ({ service, removeReservation }: Props) => {
             <div className=" bg-gray-100 flex flex-row flex-wrap md:flex-nowrap justify-end items-baseline">
               <div className="flex flex-row items-center gap-2 py-1 mr-4">
                 <div className="text-sm mx-2 flex flex-col">
-                  <p className="font-bold">{service.price}TL</p>
+                  <p className="font-bold">{p.service.price}TL</p>
                 </div>
                 <Button
                   variant={"secondary"}

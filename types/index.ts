@@ -9,8 +9,5 @@ export interface IReservation {
   name: string;
   gender: string;
   seat: number;
-  price: number;
-  from: string;
-  to: string;
-  company: string;
+  service: Service;
 }

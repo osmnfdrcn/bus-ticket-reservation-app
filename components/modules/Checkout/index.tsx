@@ -9,39 +9,25 @@ import { useRouter } from "next/navigation";
 import React, { useReducer } from "react";
 import { toast } from "react-hot-toast";
 import { v4 as uuid } from "uuid";
-import NoResult from "../NoResult";
 import { initialState, reducer } from "./reducer";
 const Checkout = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { name, ccno, ccv, expire, isLoading } = state;
   const router = useRouter();
   const { reservations, removeReservation, reset } = useReservations();
-  if (!reservations.length) {
-    return (
-      <div className="mt-[200px]">
-        <NoResult
-          title="Herhangi bir reezrvasyonunuz gorunmuyor"
-          subTitle="Lutfen once rezervasyon yapiniz."
-          buttonText="Arama Sayfasina Don"
-        />
-      </div>
-    );
-  }
 
-  const total = reservations.reduce((acc, el) => (acc += el.price), 0);
+  const total = reservations.reduce((acc, el) => (acc += el.service.price), 0);
   const wait = (milliseconds: number) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
   const handleClick = () => {
     dispatch({ type: "SET_ISLOADING", payload: true });
-    wait(1000).then(() => {
-      dispatch({ type: "SET_ISLOADING", payload: false });
-      toast.success("Odemniz alinmistir. Anasayfaya yonlendiriliyorsunuz!");
-    });
     wait(1500).then(() => {
+      dispatch({ type: "SET_ISLOADING", payload: false });
+      toast.success("Odemeniz alinmistir.");
       router.push("/");
+      reset();
     });
-    reset();
   };
 
   if (isLoading) {
@@ -120,10 +106,10 @@ const Checkout = () => {
                 <p className="text-xs text-slate-700 font-bold ">{r.name}</p>
                 <div className="flex flex-col items-center">
                   <p className="text-xs text-slate-700 font-bold">
-                    {capitalizeFirstLetter(r.from)}
+                    {capitalizeFirstLetter(r.service.from)}
                   </p>
                   <p className="text-xs text-slate-700 font-bold">
-                    {capitalizeFirstLetter(r.to)}
+                    {capitalizeFirstLetter(r.service.to)}
                   </p>
                 </div>
 
@@ -131,10 +117,10 @@ const Checkout = () => {
                   {r.seat}
                 </p>
                 <p className="text-xs text-slate-700 font-bold text-cente">
-                  {r.price}TL
+                  {r.service.price}TL
                 </p>
                 <p className="text-xs text-slate-700 font-bold text-cente">
-                  {capitalizeFirstLetter(r.company)}
+                  {capitalizeFirstLetter(r.service.company)}
                 </p>
                 <Button
                   className="font-bold"

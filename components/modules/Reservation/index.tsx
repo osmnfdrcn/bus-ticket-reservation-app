@@ -17,12 +17,11 @@ type Props = {
 };
 
 function Reservation({ service, user }: Props) {
-  const { reservations, addReservation, removeReservation, reset } =
-    useReservations();
+  const { reservations, addReservation, removeReservation } = useReservations();
   const [currentPassenger, setCurrentPassenger] = useState<{
     name: string;
     gender: string;
-  }>({ name: user.name!, gender: user.gender });
+  }>({ name: user?.name!, gender: user?.gender });
   console.log({ reservations });
 
   //otobusun koltuk duzeni
@@ -81,10 +80,7 @@ function Reservation({ service, user }: Props) {
         name: currentPassenger.name!,
         gender: currentPassenger.gender,
         seat: seatNumber,
-        price: service.price,
-        from: service.from,
-        to: service.to,
-        company: service.company,
+        service,
       });
       notBookableSeats.push(seatNumber);
       setCurrentPassenger({ name: "", gender: "" });
