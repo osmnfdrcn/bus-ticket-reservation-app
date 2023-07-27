@@ -9,6 +9,7 @@ type Props = {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
+  readOnly?: boolean;
 };
 
 function Input({
@@ -20,6 +21,7 @@ function Input({
   isError,
   errorMessage,
   placeholder,
+  readOnly,
 }: Props) {
   return (
     <div className="flex flex-col items-start gap-1 w-full">
@@ -39,6 +41,7 @@ function Input({
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
         value={value}
         placeholder={placeholder}
+        readOnly={readOnly}
       />
     </div>
   );
