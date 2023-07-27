@@ -18,7 +18,7 @@ export async function generateStaticParams() {
 
 async function Service({ params: { id } }: Props) {
   const user = await getCurrentUser();
-  // if (!user) redirect("/auth");
+  if (!user) redirect("/auth");
 
   const data = await getServices({ id });
   if (!data?.length) {

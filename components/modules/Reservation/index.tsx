@@ -2,14 +2,13 @@
 import Input from "@/components/ui/input";
 import Radio from "@/components/ui/radio";
 import Title from "@/components/ui/title";
+import useReservations from "@/hooks/useReservations";
 import { IUser } from "@/types";
 import { Service } from "@prisma/client";
-import { Suspense, useState } from "react";
-import Seat from "./Seat";
-import Bookings from "./Bookings";
+import { useState } from "react";
 import { BsExclamationOctagon } from "react-icons/bs";
-import { toast } from "react-hot-toast";
-import useReservations from "@/hooks/useReservations";
+import Bookings from "./Bookings";
+import Seat from "./Seat";
 
 type Props = {
   service: Service;
