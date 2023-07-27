@@ -25,8 +25,19 @@ function Reservation({ service, user }: Props) {
     gender: string;
   }>({ name: user?.name!, gender: user?.gender });
 
+  // eger tum rezrvasyonlar silinirse varsayilan yolcunun login olmus kullanici olmasi ve her rezervasyon eklendiginde ve cikarildiginda yolcu bilgisinin sifirlanmasi.
+  useEffect(() => {
+    if (reservations.length === 0) {
+      setCurrentPassenger({ name: user?.name!, gender: user?.gender });
+    }
+    if (reservations.length) {
+      setCurrentPassenger({ name: "", gender: "" });
+    }
+  }, [reservations.length]);
+
   // koltukta oturan varsa ve karsi cins ise oturdugu koltuk numarasini al, once 4'e sonra tekrar 2'ye gore moduna al sonuc tek ise koltuk numarasinin + 1'ine, cift ise -1'ine oturulamaz.
   //burasi daha sonra performans nedeni ile duzenlenmeli.
+
   const busSeats = useMemo(() => createBusSeats(), []);
   useEffect(() => {
     const newNotBookableSeats: number[] = [];
@@ -54,7 +65,6 @@ function Reservation({ service, user }: Props) {
         service,
       });
       notBookableSeats.push(seatNumber);
-      setCurrentPassenger({ name: "", gender: "" });
     }
   };
 

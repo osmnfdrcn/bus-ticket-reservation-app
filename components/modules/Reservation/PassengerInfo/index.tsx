@@ -21,6 +21,8 @@ const PassengerInfo = ({ currentPassenger, setCurrentPassenger }: Props) => {
     setName("");
     setGender("");
   };
+  console.log(name, gender);
+
   return (
     <>
       <Title text="Yolcu Bilgileri" />
@@ -29,9 +31,9 @@ const PassengerInfo = ({ currentPassenger, setCurrentPassenger }: Props) => {
           type="text"
           label="Isim Soyisim"
           name={"name"}
-          value={name || currentPassenger.name}
+          value={name}
           onChange={(e) => setName(e.target.value)}
-          readOnly={!!currentPassenger?.name}
+          // readOnly={!!currentPassenger?.name}
         />
         <div className="flex items-center justify-between w-full px-2">
           <Radio
@@ -39,12 +41,16 @@ const PassengerInfo = ({ currentPassenger, setCurrentPassenger }: Props) => {
               { label: "Erkek", value: "erkek", name: "erkek" },
               { label: "Kadin", value: "kadin", name: "kadin" },
             ]}
-            currentPassengerGender={gender || currentPassenger.gender}
+            currentPassengerGender={gender}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setGender(e.target.value);
             }}
           />
-          <Button size={"small"} onClick={handleButtonClick}>
+          <Button
+            size={"small"}
+            onClick={handleButtonClick}
+            disabled={!name || !gender}
+          >
             {" "}
             OK
           </Button>

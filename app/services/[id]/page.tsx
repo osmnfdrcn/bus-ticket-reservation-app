@@ -2,8 +2,8 @@ import NoResult from "@/components/modules/NoResult";
 import Reservation from "@/components/modules/Reservation";
 import getCurrentUser from "@/helpers/getCurrentUser";
 import getServices from "@/helpers/getServices";
-import { redirect } from "next/navigation";
 import prisma from "@/libs/prismadb";
+import { redirect } from "next/navigation";
 
 type Props = {
   params: {
