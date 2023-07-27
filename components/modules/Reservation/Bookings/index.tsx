@@ -98,6 +98,9 @@ const Bookings = ({ service, removeReservation }: Props) => {
       {reservations.length ? (
         <Button onClick={handleCheckoutButtonClick}>Odeme Sayfasina Git</Button>
       ) : null}
+      <Button variant={"secondary"} onClick={() => router.push("/search")}>
+        Arama Sayfasina Git
+      </Button>
     </div>
   );
 };
